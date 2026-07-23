@@ -1,1 +1,227 @@
+// =========================
+// Step 1: Base Class
+// =========================
 
+class Person {
+  #email;
+  #id;
+
+  constructor(name, email, id) {
+    this.name = name;
+    this.email = email; // يستخدم Setter
+    this.id = id; // يستخدم Setter
+  }
+
+  // Getter & Setter for Email
+  get email() {
+    return this.#email;
+  }
+
+  set email(value) {
+    if (value.includes("@")) {
+      this.#email = value;
+    } else {
+      console.log("Invalid Email!");
+    }
+  }
+
+  // Getter & Setter for ID
+  get id() {
+    return this.#id;
+  }
+
+  set id(value) {
+    if (value > 0) {
+      this.#id = value;
+    } else {
+      console.log("Invalid ID!");
+    }
+  }
+
+  // Method to override
+  describeRole() {
+    console.log(`${this.name} is a school member.`);
+  }
+}
+
+// =========================
+// Step 2: Principal Class
+// =========================
+
+class Principal extends Person {
+  constructor(name, email, id) {
+    super(name, email, id);
+    this.members = [];
+  }
+
+  addMember(member) {
+    this.members.push(member);
+    console.log(`${member.name} has been added.`);
+  }
+
+  removeMember(memberId) {
+    this.members = this.members.filter(
+      (member) => member.id !== memberId
+    );
+    console.log(`Member with ID ${memberId} removed.`);
+  }
+
+  listMembers() {
+    console.log("\nSchool Members:");
+    this.members.forEach((member) => {
+      console.log(
+        `Name: ${member.name}, ID: ${member.id}, Email: ${member.email}`
+      );
+    });
+  }
+
+  describeRole() {
+    console.log(`${this.name} is the Principal and manages the school.`);
+  }
+}
+
+// =========================
+// Step 3: Teacher Class
+// =========================
+
+class Teacher extends Person {
+  constructor(name, email, id, subject) {
+    super(name, email, id);
+    this.subject = subject;
+    this.grades = [];
+  }
+
+  gradeStudent(studentName, grade) {
+    this.grades.push({
+      studentName,
+      grade,
+    });
+
+    console.log(
+      `${studentName} received ${grade} in ${this.subject}.`
+    );
+  }
+
+  listGrades() {
+    console.log(`\nGrades by ${this.name}:`);
+
+    this.grades.forEach((student) => {
+      console.log(`${student.studentName}: ${student.grade}`);
+    });
+  }
+
+  describeRole() {
+    console.log(`${this.name} teaches ${this.subject}.`);
+  }
+}
+
+// =========================
+// Step 4: Student Class
+// =========================
+
+class Student extends Person {
+  constructor(name, email, id) {
+    super(name, email, id);
+    this.subjects = [];
+  }
+
+  enrollSubject(subject) {
+    this.subjects.push(subject);
+    console.log(`${this.name} enrolled in ${subject}.`);
+  }
+
+  viewSubjects() {
+    console.log(`\n${this.name}'s Subjects:`);
+
+    this.subjects.forEach((subject) => {
+      console.log(subject);
+    });
+  }
+
+  describeRole() {
+    console.log(`${this.name} is a student.`);
+  }
+}
+
+// =========================
+// Step 5: Create Objects
+// =========================
+
+const principal = new Principal(
+  "Mr. Ahmed",
+  "principal@school.com",
+  1
+);
+
+const teacher1 = new Teacher(
+  "Ms. Sara",
+  "sara@school.com",
+  2,
+  "Mathematics"
+);
+
+const teacher2 = new Teacher(
+  "Mr. Ali",
+  "ali@school.com",
+  3,
+  "Physics"
+);
+
+const student1 = new Student(
+  "Omar",
+  "omar@student.com",
+  101
+);
+
+const student2 = new Student(
+  "Mona",
+  "mona@student.com",
+  102
+);
+
+// =========================
+// Principal Actions
+// =========================
+
+principal.addMember(teacher1);
+principal.addMember(teacher2);
+principal.addMember(student1);
+principal.addMember(student2);
+
+principal.listMembers();
+
+// =========================
+// Teacher Actions
+// =========================
+
+teacher1.gradeStudent("Omar", 95);
+teacher1.gradeStudent("Mona", 88);
+
+teacher1.listGrades();
+
+// =========================
+// Student Actions
+// =========================
+
+student1.enrollSubject("Mathematics");
+student1.enrollSubject("Physics");
+
+student1.viewSubjects();
+
+// =========================
+// Polymorphism
+// =========================
+
+console.log("\nDescribe Roles:");
+
+const schoolMembers = [
+  principal,
+  teacher1,
+  teacher2,
+  student1,
+  student2,
+];
+
+schoolMembers.forEach((member) => {
+  member.describeRole();
+});
