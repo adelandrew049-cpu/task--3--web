@@ -8,8 +8,8 @@ class Person {
 
   constructor(name, email, id) {
     this.name = name;
-    this.email = email; // يستخدم Setter
-    this.id = id; // يستخدم Setter
+    this.email = email;
+    this.id = id; 
   }
 
   // Getter & Setter for Email
