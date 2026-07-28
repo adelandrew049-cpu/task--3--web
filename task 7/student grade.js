@@ -1,0 +1,103 @@
+//read.grades.js
+const fs = require("fs");
+
+function readGrades() {
+    const data = fs.readFileSync("./data/grades.json", "utf8");
+
+    return JSON.parse(data);
+}
+
+module.exports = readGrades;
+//save.grades.js
+const fs = require("fs");
+
+function saveGrades(grades) {
+    fs.writeFileSync(
+        "./data/grades.json",
+        JSON.stringify(grades, null, 2)
+    );
+}
+
+module.exports = saveGrades;
+//add.grade.js
+const readGrades = require("./read.grades");
+const saveGrades = require("./save.grades");
+
+function addGrade(id, name, subject, grade) {
+
+    const grades = readGrades();
+
+    grades.push({
+        id,
+        name,
+        subject,
+        grade
+    });
+
+    saveGrades(grades);
+
+    console.log("Student added successfully.");
+}
+
+module.exports = addGrade;
+//delete.grade.js
+const readGrades = require("./read.grades");
+const saveGrades = require("./save.grades");
+
+function deleteGrade(id) {
+
+    const grades = readGrades();
+
+    const newGrades = grades.filter(student => student.id !== id);
+
+    saveGrades(newGrades);
+
+    console.log("Student deleted successfully.");
+}
+
+module.exports = deleteGrade;
+//update.grade.js
+const readGrades = require("./read.grades");
+const saveGrades = require("./save.grades");
+
+function updateGrade(id, newGrade) {
+
+    const grades = readGrades();
+
+    const student = grades.find(student => student.id === id);
+
+    if (!student) {
+        console.log("Student not found.");
+        return;
+    }
+
+    student.grade = newGrade;
+
+    saveGrades(grades);
+
+    console.log("Grade updated successfully.");
+}
+
+module.exports = updateGrade;
+//main.js
+const addGrade = require("./modules/add.grade");
+const deleteGrade = require("./modules/delete.grade");
+const updateGrade = require("./modules/update.grade");
+const readGrades = require("./modules/read.grades");
+
+// Add Students
+addGrade(1, "Ahmed", "Math", 95);
+addGrade(2, "Sara", "Physics", 88);
+
+// Read Students
+console.log(readGrades());
+
+// Update Grade
+updateGrade(2, 98);
+
+console.log(readGrades());
+
+// Delete Student
+deleteGrade(1);
+
+console.log(readGrades());
