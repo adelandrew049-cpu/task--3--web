@@ -1,1 +1,199 @@
+DriveHub – Car Rental Management System 
 
+1. Project Description 
+
+DriveHub is a web application that allows customers to rent cars online. Customers can browse available cars, make reservations, and manage their bookings. Employees manage cars and reservations, while administrators manage the entire system. 
+
+2. User Roles & Permissions 
+
+Admin 
+
+Manage users 
+
+Manage cars 
+
+Manage reservations 
+
+View reports 
+
+Employee 
+
+Add/Edit/Delete cars 
+
+Approve or reject reservations 
+
+Update car availability 
+
+Customer 
+
+Register & Login 
+
+Browse cars 
+
+Book a car 
+
+View booking history 
+
+Update profile 
+
+ 
+
+3. Main Features 
+
+Authentication 
+
+Register 
+
+Login 
+
+Logout 
+
+Forgot Password 
+
+Authorization 
+
+Role-Based Access Control 
+
+Protected Dashboards 
+
+Different permissions for each role 
+
+CRUD Features 
+
+Cars 
+
+Create 
+
+Read 
+
+Update 
+
+Delete 
+
+Reservations 
+
+Create 
+
+Read 
+
+Update 
+
+Delete 
+
+Users (Admin Only) 
+
+Create 
+
+Read 
+
+Update 
+
+Delete 
+
+ 
+
+4. Image / File Upload 
+
+Upload 
+
+File Type 
+
+Max Size 
+
+Uploaded By 
+
+Profile Picture 
+
+JPG, PNG 
+
+5 MB 
+
+All Users 
+
+Driving License 
+
+JPG, PNG, PDF 
+
+10 MB 
+
+Customer 
+
+Car Image 
+
+JPG, PNG 
+
+10 MB 
+
+Admin / Employee 
+
+ 
+
+5. Application Pages 
+
+Login 
+
+Register 
+
+Home 
+
+Admin Dashboard 
+
+Customer Dashboard 
+
+Cars List 
+
+Car Details 
+
+Reservations 
+
+Manage Users 
+
+Profile 
+
+6. Summary 
+
+Authentication 
+
+✅ Register 
+
+✅ Login 
+
+✅ Logout 
+
+Authorization 
+
+✅ Role-Based Access 
+
+✅ Protected Pages 
+
+CRUD 
+
+✅ Cars 
+
+✅ Reservations 
+
+✅ Users 
+
+Upload 
+
+✅ Profile Picture 
+
+✅ Driving License 
+
+✅ Car Images 
+
+UI Design 
+
+✅ Simple UI Prototype (HTML/Figma) 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
