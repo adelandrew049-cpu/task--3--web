@@ -9,6 +9,9 @@ const router = express.Router();
 router.use(protect);
 
 // Self-service routes (any logged-in user)
+// "/profile" matches the Session 6 assignment's example protected route; "/me" is
+// the original DriveHub route name — both point at the same controller.
+router.get("/profile", userControllers.getMe);
 router.get("/me", userControllers.getMe);
 router.patch("/me", userControllers.updateMe);
 router.post(
