@@ -3,9 +3,6 @@ const authControllers = require("../controllers/auth-controllers");
  
 const router = express.Router();
  
-// "/signup" matches the Session 6 assignment spec; "/register" is the original
-// DriveHub route name — both point at the same controller.
-router.post("/signup", authControllers.register);
 router.post("/register", authControllers.register);
 router.post("/login", authControllers.login);
 router.post("/logout", authControllers.logout);
