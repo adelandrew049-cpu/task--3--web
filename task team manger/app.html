@@ -1,0 +1,307 @@
+<div class="container">
+
+  <!-- Application Title -->
+  <h1>Team Manager</h1>
+
+  <!-- ========================= -->
+  <!-- Add New Member Form -->
+  <!-- ========================= -->
+
+  <div class="form-container">
+
+    <h2>Add New Team Member</h2>
+
+    <!-- Name -->
+    <input
+      type="text"
+      placeholder="Member Name"
+      [(ngModel)]="newMember.name"
+    />
+
+    <!-- Age -->
+    <input
+      type="number"
+      placeholder="Age"
+      [(ngModel)]="newMember.age"
+    />
+
+    <!-- Department -->
+    <select [(ngModel)]="newMember.department">
+
+      <option value="">
+        Select Department
+      </option>
+
+      @for (department of departments; track department) {
+
+        <option [value]="department">
+          {{ department }}
+        </option>
+
+      }
+
+    </select>
+
+    <!-- Availability -->
+    <label class="checkbox">
+
+      <input
+        type="checkbox"
+        [(ngModel)]="newMember.available"
+      />
+
+      Available
+
+    </label>
+
+    <!-- Add Button -->
+    <button (click)="addMember()">
+      Add Member
+    </button>
+
+    <!-- Validation Message -->
+    @if (errorMessage) {
+
+      <p class="error">
+        {{ errorMessage }}
+      </p>
+
+    }
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- Filters and View Mode -->
+  <!-- ========================= -->
+
+  <div class="controls">
+
+    <!-- Department Filter -->
+    <div>
+
+      <label>Filter by Department:</label>
+
+      <select [(ngModel)]="selectedDepartment">
+
+        <option value="All Departments">
+          All Departments
+        </option>
+
+        @for (department of departments; track department) {
+
+          <option [value]="department">
+            {{ department }}
+          </option>
+
+        }
+
+      </select>
+
+    </div>
+
+
+    <!-- View Selector -->
+    <div>
+
+      <label>View:</label>
+
+      <select [(ngModel)]="viewMode">
+
+        <option value="card">
+          Card View
+        </option>
+
+        <option value="list">
+          List View
+        </option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- Empty Team -->
+  <!-- ========================= -->
+
+  @if (members.length === 0) {
+
+    <p class="empty">
+      No team members exist yet.
+    </p>
+
+  }
+
+
+  <!-- ========================= -->
+  <!-- No Filter Results -->
+  <!-- ========================= -->
+
+  @if (
+    members.length > 0 &&
+    filteredMembers.length === 0
+  ) {
+
+    <p class="empty">
+      No members match this department.
+    </p>
+
+  }
+
+
+  <!-- ========================= -->
+  <!-- Display Members -->
+  <!-- ========================= -->
+
+  @if (filteredMembers.length > 0) {
+
+    @switch (viewMode) {
+
+
+      <!-- ========================= -->
+      <!-- Card View -->
+      <!-- ========================= -->
+
+      @case ('card') {
+
+        <div class="cards">
+
+          @for (
+            member of filteredMembers;
+            track member.id
+          ) {
+
+            <div
+              class="member-card"
+              [class.available]="member.available"
+              [class.unavailable]="!member.available"
+            >
+
+              <h3>
+                {{ member.name }}
+              </h3>
+
+              <p>
+                <strong>Age:</strong>
+                {{ member.age }}
+              </p>
+
+              <p>
+                <strong>Department:</strong>
+                {{ member.department }}
+              </p>
+
+              <p>
+
+                <strong>Status:</strong>
+
+                @if (member.available) {
+
+                  <span class="status-available">
+                    Available ✔
+                  </span>
+
+                } @else {
+
+                  <span class="status-unavailable">
+                    Unavailable ✖
+                  </span>
+
+                }
+
+              </p>
+
+              <button
+                (click)="toggleAvailability(member)"
+              >
+
+                @if (member.available) {
+                  Mark Unavailable
+                } @else {
+                  Mark Available
+                }
+
+              </button>
+
+            </div>
+
+          }
+
+        </div>
+
+      }
+
+
+      <!-- ========================= -->
+      <!-- List View -->
+      <!-- ========================= -->
+
+      @case ('list') {
+
+        <div class="member-list">
+
+          @for (
+            member of filteredMembers;
+            track member.id
+          ) {
+
+            <div
+              class="list-item"
+              [class.available]="member.available"
+              [class.unavailable]="!member.available"
+            >
+
+              <span>
+                <strong>{{ member.name }}</strong>
+                -
+                {{ member.department }}
+              </span>
+
+
+              @if (member.available) {
+
+                <span>
+                  ✔ Available
+                </span>
+
+              } @else {
+
+                <span>
+                  ✖ Unavailable
+                </span>
+
+              }
+
+
+              <button
+                (click)="toggleAvailability(member)"
+              >
+                Toggle
+              </button>
+
+            </div>
+
+          }
+
+        </div>
+
+      }
+
+
+      <!-- Default -->
+      @default {
+
+        <p>
+          Invalid view mode.
+        </p>
+
+      }
+
+    }
+
+  }
+
+</div>
